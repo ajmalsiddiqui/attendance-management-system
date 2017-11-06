@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div class="main">
+        <div id="attendance-div">
+            <form id="attendance-form" method="POST" action="http://localhost:2000/attendance/postAttendance">
+                <table id="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ajmal</td>
+                                <td>
+                                    <select name="attendance">
+                                        <option value="present">Present</option>
+                                        <option value="absent">Absent</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                            <input type="submit" value="Post Attendance">
+                    </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

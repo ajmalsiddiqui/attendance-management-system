@@ -1,0 +1,38 @@
+<div id="attendance-div">
+    <div>
+        <p>Course: {{course}}</p>
+        <p>Date: {{date}}</p>
+        <p>Faculty: {{faculty}}</p>
+    </div>
+    <form id="attendance-form" method="POST" action="/attendance/postAttendance">
+        <table id="attendance-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each students}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>
+                        <select name="attendance-{{this._id}}">
+                                        <option value="present">Present</option>
+                                        <option value="absent">Absent</option>
+                                    </select>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div style="display: none;">
+            <input type="hidden" name="courseId" value="{{course}}">
+            <input type="hidden" name="facultyId" value="{{faculty}}">
+            <input type="hidden" name="classDate" value="{{date}}">
+        </div>
+        <div>
+            <input type="submit" value="Post Attendance">
+        </div>
+    </form>
+</div>
