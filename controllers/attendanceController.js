@@ -169,5 +169,43 @@ module.exports = {
                 });
             }
         });
+    },
+
+    'renderPostPageByEmpId': (req, res) => {
+        Faculty.findOne({empId: req.query.empId}).exec((err, fac) => {
+            if(err) res.render('error', {
+                info: err.toString(),
+                message: "Error in finding faculty"
+            });
+            else if(!fac) res.render('error', {
+                info: "Error: no faculty found",
+                message: "Error: no faculty found"
+            });
+            else {
+                Classroom.findOne({course: req.query.courseId, faculty: fac._id}).populate({
+                    path:'students',
+                    model:'Student'
+            }).exec((err, classroom) => {
+                if(err) res.render('error', {
+                    info: err.toString(),
+                    message: "Error in finding classroom"
+                });
+                else if(!classroom) res.render('error', {
+                    info: "Error: no classroom found",
+                    message: "Error: no classroom found"
+                });
+                else {
+                    console.log(classroom);
+                    res.render('post-attendance',{
+                        course: req.query.courseId,
+                        faculty: fac._id,
+                        date: req.query.classDate,
+                        classroomId: classroom._id,
+                        students: classroom.students
+                    });
+                }
+            });
+            }
+        });
     }
 }

@@ -85,5 +85,43 @@ module.exports = {
                 });
             }
         });
-    }
+    },
+
+    'renderFacultyLogin': (req, res) => {
+        res.render('facultyLogin');
+    },
+
+    // POST request for login
+    'loginWeb': (req, res) => {
+        console.log(req.body);
+        Faculty.findOne({empId: req.body.empId}).exec((err, faculty) => {
+            console.log(faculty);
+            if(err) res.render('studentLogin', {
+                status: 400,
+                message: "Error in finding faculty",
+                info: JSON.stringify(err)
+            });
+            else if(!faculty) res.render('facultyLogin', {
+                status: 400,
+                message: "Error: no such faculty found",
+                info: "Error: no such faculty found"
+            });
+            else {
+                bcrypt.compare(req.body.password, faculty.password, function(err, resp) {
+                    if(!resp) res.render('facultyLogin', {
+                        status: 400,
+                        message: "Error: invalid credentials",
+                        info: "Error: invalid credentials"
+                    });
+                    else {
+                        // TODO: render student home page
+                        let stu = faculty;
+                        delete stu.password;
+                        // render faculty classrooms
+                        res.redirect('/attendance/renderPostPageByEmpId?empId=' + faculty.empId + '&courseId=' + req.body.courseId + '&classDate=' + req.body.classDate );
+                    }
+                });
+            }
+        });
+    },
 }

@@ -11,4 +11,12 @@ router.post('/newFaculty', (req, res) => {
     facultyController.newFaculty(req, res);
 });
 
+router.post('/loginWeb', (req, res) => {
+    facultyController.loginWeb(req, res);
+});
+
+router.get('/', (req, res) => {
+    res.render('facultyLogin');
+});
+
 module.exports = router;

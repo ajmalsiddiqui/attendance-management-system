@@ -17,4 +17,8 @@ router.post('/postAttendance', (req, res) => {
 router.get('/renderPostPage', (req, res) => {
     attendanceController.renderPostPage(req, res);
 });
+
+router.get('/renderPostPageByEmpId', (req, res) => {
+    attendanceController.renderPostPageByEmpId(req, res);
+});
 module.exports = router;

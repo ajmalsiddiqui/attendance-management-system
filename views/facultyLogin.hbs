@@ -1,11 +1,15 @@
 <div class="login" id="faculty-login">
     <form class="login-form" action="/faculty/loginWeb" method="POST">
         <fieldset>
-            <legend>faculty Login</legend>
-            <label for="faculty-login-regno" class="login-label">Registration Number:</label>
+            <legend>Faculty Login</legend>
+            <label for="faculty-login-regno" class="login-label">Employee ID:</label>
             <input type="text" id="faculty-login-empid" name="empId">
             <label for="faculty-login-password" class="login-label">Password:</label>
             <input type="password" id="faculty-login-password" name="password">
+            <label for="faculty-login-password" class="login-label">CourseId:</label>
+            <input type="text" id="faculty-login-password" name="courseId">
+            <label for="faculty-login-password" class="login-label">Class Date:</label>
+            <input type="date" id="faculty-login-password" name="classDate">
             <input type="submit" value="login">
         </fieldset>
     </form>
