@@ -15,4 +15,9 @@ router.get('/getOverallAttendanceByClassroom', (req, res) => {
     studentAttendanceController.getOverallAttendanceByClassroom(req, res);
 });
 
+router.get('/renderDetailedAttendance', (req, res) => {
+    console.log('hello');
+    studentAttendanceController.renderDetailedAttendance(req, res);
+});
+
 module.exports = router;

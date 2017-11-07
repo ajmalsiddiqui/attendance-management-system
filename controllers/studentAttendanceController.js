@@ -64,8 +64,67 @@ module.exports = {
                                         classroom: req.query.classroomId,
                                         totalClasses: totalClasses,
                                         attendedClasses: attendedClasses,
-                                        percentage: (attendedClasses/totalClasses)*100
+                                        percentage: (attendedClasses/totalClasses)*100,
+                                        attendances: attendances
                                     })
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    },
+
+    'renderDetailedAttendance': (req, res) => {
+        Attendance.find({classroom: req.query.classroomId}).exec((err, attendances) => {
+            console.log(err);
+            if (err) {
+                res.render('error', {
+                    status: 400,
+                    message: "Error in finding attendance",
+                    info: JSON.stringify(err)
+                });
+            }
+            else {
+                const totalClasses = attendances.length;
+                StudentAttendance.find({
+                    student: req.query.studentId,
+                    classroom: req.query.classroomId
+                }).exec((err, studentAttendances) => {
+                    console.log(err);
+                    if (err) {
+                        res.render('error', {
+                            status: 400,
+                            message: "Error in finding student attendance",
+                            info: JSON.stringify(err)
+                        });
+                    }
+                    else if(studentAttendances.length === 0) res.render('error', {
+                        status: 400,
+                        message: "Error: no attendance has been posted for this class",
+                        info: "Error: no attendance has been posted for this class",
+                        backMessage: "Back",
+                        studentId: req.query.studentId
+                    });
+                    else {
+                        let attendedClasses = 0;
+                        let k = 0;
+                        console.log('check');
+                        console.log(studentAttendances);
+                        studentAttendances.forEach(studentAttendance => {
+                            console.log('foreach');
+                            if(studentAttendance.isPresent) attendedClasses++;
+                            k++;
+                            console.log(k);
+                            if(k === studentAttendances.length){
+                                res.render('studentDetailedAttendance', {
+                                        classroomId: req.query.classroomId,
+                                        totalClasses: totalClasses,
+                                        attendedClasses: attendedClasses,
+                                        percentage: (attendedClasses/totalClasses)*100,
+                                        attendances: studentAttendances,
+                                        studentId: req.query.studentId
                                 });
                             }
                         });

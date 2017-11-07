@@ -14,4 +14,7 @@ router.post('/postAttendance', (req, res) => {
     attendanceController.addAttendance(req, res);
 });
 
+router.get('/renderPostPage', (req, res) => {
+    attendanceController.renderPostPage(req, res);
+});
 module.exports = router;

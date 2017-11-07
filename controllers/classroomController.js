@@ -108,10 +108,22 @@ module.exports = {
                                 });
                             }
                             else {
-                                res.status(200).json({
-                                    status: 200,
-                                    message: "Successfully added student to classroom",
-                                    info: JSON.stringify(classroom)
+                                student.classrooms.push(classroom._id);
+                                student.save(err => {
+                                    if (err) {
+                                        res.status(400).json({
+                                            status: 400,
+                                            message: "Error in updating student",
+                                            info: JSON.stringify(err)
+                                        });
+                                    }
+                                    else {
+                                        res.status(200).json({
+                                            status: 200,
+                                            message: "Successfully added student to classroom",
+                                            info: JSON.stringify(classroom)
+                                        });
+                                    }
                                 });
                             }
                         });

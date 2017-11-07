@@ -1,0 +1,19 @@
+<div id="classroom-list">
+    <table>
+        <thead>
+            <tr>
+                <th>Classroom</th>
+                <th>Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: add href -->
+            {{#each classrooms}}
+            <tr>
+                <td><a href="/studentAttendance/renderDetailedAttendance?studentId={{../studentId}}&classroomId={{this._id}}">{{this._id}}</a></td>
+                <td>{{this.faculty.name}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

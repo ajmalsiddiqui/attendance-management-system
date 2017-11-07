@@ -1,0 +1,14 @@
+<div class="login" id="student-login">
+    <form class="login-form" action="/student/loginWeb" method="POST">
+        <fieldset>
+            <legend>Student Login</legend>
+            <label for="student-login-regno" class="login-label">Registration Number:</label>
+            <input type="text" id="student-login-regno" name="regno">
+            <label for="student-login-password" class="login-label">Password:</label>
+            <input type="password" id="student-login-password" name="password">
+            <input type="submit" value="login">
+        </fieldset>
+    </form>
+    <p>{{message}}</p>
+</div>
+<!-- TODO: Signup for students -->
